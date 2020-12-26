@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appenders>
+	<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+		<PatternLayout pattern="${console.log.patten}" />
+	</Console>
+	<RollingFile
+		name="TraceRollingFileAppender" fileName="${log.dir}/${log.file.prefix}-trace.log" immediateFlush="false" append="true" 
+		filePattern="$${log.dir}/$${date:yyyy-MM}/$${log.file.prefix}-trace-%d{yyyy-MM-dd}-%i.log.gz">
+		<PatternLayout>
+			<Pattern>${file.log.patten.trace}</Pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy />
+			<SizeBasedTriggeringPolicy size="20 MB" />
+		</Policies>
+		<DefaultRolloverStrategy max="10" />
+	</RollingFile>
+	<RollingFile
+		name="SysRollingFileAppender" fileName="${log.dir}/${log.file.prefix}-system.log" immediateFlush="false" append="true" 
+		filePattern="$${log.dir}/$${date:yyyy-MM}/$${log.file.prefix}-system-%d{yyyy-MM-dd}-%i.log.gz">
+		<PatternLayout>
+			<Pattern>${file.log.patten.sys}</Pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy />
+			<SizeBasedTriggeringPolicy size="20 MB" />
+		</Policies>
+		<DefaultRolloverStrategy max="10" />
+	</RollingFile>
+	<!-- 下面是更高性能的appender ，特点是会缓存一定大小后输出到日志文件 -->
+<!-- 	
+	<RollingRandomAccessFile
+		name="TraceRollingFileAppender" fileName="${log.dir}/${log.file.prefix}-trace.log" immediateFlush="false" append="true" 
+		filePattern="$${log.dir}/$${date:yyyy-MM}/$${log.file.prefix}-trace-%d{yyyy-MM-dd}-%i.log.gz">
+		<PatternLayout>
+			<Pattern>${file.log.patten.trace}</Pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy />
+			<SizeBasedTriggeringPolicy size="20 MB" />
+		</Policies>
+		<DefaultRolloverStrategy max="10" />
+	</RollingRandomAccessFile>
+	<RollingRandomAccessFile
+		name="SysRollingFileAppender" fileName="${log.dir}/${log.file.prefix}-system.log" immediateFlush="false" append="true" 
+		filePattern="$${log.dir}/$${date:yyyy-MM}/$${log.file.prefix}-system-%d{yyyy-MM-dd}-%i.log.gz">
+		<PatternLayout>
+			<Pattern>${file.log.patten.sys}</Pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy />
+			<SizeBasedTriggeringPolicy size="20 MB" />
+		</Policies>
+		<DefaultRolloverStrategy max="10" />
+	</RollingRandomAccessFile>
+-->
+</appenders>

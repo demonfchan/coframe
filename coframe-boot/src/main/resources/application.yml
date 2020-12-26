@@ -1,0 +1,156 @@
+server: 
+  port: 8080
+  servlet:
+    context-path: /
+    session:
+      cookie:
+        name: SESSIONID
+  tomcat:
+    max-threads: 1000
+
+spring:
+  application:
+    name: coframe
+  redis:
+    host: 10.15.15.107
+    port: 6379
+    password: 
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.15.15.207:3306/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456789
+    
+    #url: jdbc:mysql://10.15.15.74:3306/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #username: root
+    #password: root
+    
+    #driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://10.15.15.195:5432/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #username: coframe
+    #password: coframe890
+    
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
+    #url: jdbc:oracle:thin:@10.15.15.192:1521:EP8
+    #username: coframe
+    #password: coframe890
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 100
+      idle-timeout: 1800000
+      max-lifetime: 3600000
+      connection-timeout: 10000
+    
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non-null
+    deserialization:
+      fail-on-unknown-properties: false
+  jpa:
+    # open-in-view: false 
+    database: MYSQL
+    #database: postgresql
+    #database: oracle
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        #dialect: org.hibernate.dialect.PostgreSQLDialect
+        #dialect: org.hibernate.dialect.Oracle10gDialect
+        temp: 
+          use_jdbc_metadata_defaults: false
+        format_sql: true
+      javax.persistence.validation.mode: none
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#       implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+  resources:
+    add-mappings: true
+  servlet:
+    multipart:
+      max-request-size: 5MB
+        
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      eos.sys-code: ${eos.application.sys-code}
+      eos.pid: ${PID}
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://10.15.15.128:8761/eureka/
+    
+security:
+  iam:
+    sso: 
+      enabled: false
+      host: http://10.15.15.116:9091/iam          ###替换为IAM前端部署的IP和端口号
+      logoutUrl: /logout
+    enabled: true
+    login-url: /sso-login
+    logout-url: /logout
+  oauth2:
+    client:
+      client-id:  BvgDwDxR1PLn       #替换为创建系统产生的client-id
+      client-secret: lRZcxJRVvWQA0KkXtEUPFiBIKx17b7Rs9mE0JOGeo8SpeuxK                   #替换为创建系统产生的client-secret
+      access-token-uri: ${security.iam.sso.host}/oauth/token
+      user-authorization-uri: ${security.iam.sso.host}/oauth/authorize
+      scope: default
+      use-current-uri: false
+      pre-established-redirect-uri: http://192.168.7.235:9527/
+    resource:
+      jwt:
+        key-value: non-prod-signature
+    sso:
+      login-path: {security.iam.login-url}       
+  basic:
+    enabled: false
+
+coframe:
+  auth:
+    token-expired: 7200
+    token-refresh-interval: 1200
+    # exclude-paths: /images/**,/fonts/**,/js/**
+  bean-enabled:
+    hibernate5-module: true
+    multipart-config-factory: true
+    swagger-docket: true
+    local-validator-factory-bean: true
+    exception-handler: true
+  cache:
+    enabled: true
+    type: redis
+    key-namespace: ${spring.application.name}
+  filter:
+    token:
+      enabled: false
+  tools:
+    enabled: true
+  sync: 
+    uri: http://10.15.15.69:8082
+  cron: 
+    time: 0 0/30 * * * ?
+      
+eos:
+  application:
+    sys-code: wangwb-system
+    sys-key: 972d1e8bd7a1408eab823d2ac02e25d8
+    
+apollo:
+  bootstrap:
+    enabled: false
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: mappings

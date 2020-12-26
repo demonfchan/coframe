@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.primeton.eos</groupId>
+		<artifactId>eos-dap-pom</artifactId>
+		<version>5.0.0</version>
+	</parent>
+
+	<groupId>org.gocom.coframe</groupId>
+	<artifactId>coframe</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<revision>5.0.0</revision>
+		<jwt.version>3.4.1</jwt.version>
+		<jackson.yaml>2.3.3</jackson.yaml>
+		<poi.version>3.17</poi.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.auth0</groupId>
+				<artifactId>java-jwt</artifactId>
+				<version>${jwt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-yaml</artifactId>
+				<version>${jackson.yaml}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth.boot</groupId>
+				<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+				<version>2.1.2.RELEASE</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>coframe-sdk</module>
+		<module>coframe-core</module>
+		<module>coframe-org</module>
+		<module>coframe-user</module>
+		<module>coframe-dict</module>
+		<module>coframe-auth</module>
+		<module>coframe-iam</module>
+		<module>coframe-starter</module>
+		<module>coframe-boot</module>
+	</modules>
+</project>

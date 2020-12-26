@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+com.primeton.iam.config.OAuth2AutoConfigurationExclusionFilter
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.primeton.iam.config.IAMSecurityConfiguration,\
+com.primeton.iam.config.IAMResourceServerConfiguration,\
+com.primeton.iam.config.IAMFormLoginConfiguration

@@ -1,0 +1,91 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /coframe
+  tomcat:
+    max-threads: 1000
+
+spring:
+  application:
+    name: cofqinsc
+  redis:
+    host: 10.15.15.74
+    port: 6379
+    password: 
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.15.15.74:3306/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 100
+      idle-timeout: 1800000
+      max-lifetime: 3600000
+      connection-timeout: 10000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non-null
+    deserialization:
+      fail-on-unknown-properties: false
+  jpa:
+    database: MYSQL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+      javax.persistence.validation.mode: none
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  resources:
+    add-mappings: true
+  servlet:
+    multipart:
+      max-request-size: 5MB
+      
+eureka:
+  instance:
+    metadata-map:
+      eos.sys-code: SYS_01
+      eos.pid: ${PID}
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://10.15.15.128:8761/eureka/
+
+logging:
+  pattern:
+    console: "${PID} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-40.40logger{40}:%-5.5L - %msg%n"
+    file:    "${PID} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-40.40logger{40}:%-5.5L - %msg%n"
+  file:
+    max-history: 100
+    max-size: 100MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
+security:
+  basic.enabled: false 
+
+coframe:
+  auth:
+    tokenExpired: 3600
+    tokenRefreshInterval: 1800
+  cache:
+    enabled: true
+    type: redis
+    key-namespace: ${spring.application.name}
+  filter:
+    token:
+      enabled: false
+  tools:
+    enabled: true
+    
