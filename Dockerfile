@@ -7,5 +7,6 @@ RUN mvn -s settings.xml -X clean package
 
 FROM chenmins/serverjre8:util
 COPY --from=app /usr/src/mymaven/coframe-boot/target/EOS_Microservices_5.0_Coframe.tar.gz /opt
-RUN tar -zxvf /opt/EOS_Microservices_5.0_Coframe.tar.gz
+WORKDIR /opt
+RUN tar -zxvf /opt/EOS_Microservices_5.0_Coframe.tar.gz -C /opt && rm -f /opt/EOS_Microservices_5.0_Coframe.tar.gz
 CMD ["/opt/bin/startup.sh","run"]
