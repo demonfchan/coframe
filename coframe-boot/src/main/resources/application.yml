@@ -12,16 +12,16 @@ spring:
   application:
     name: coframe
   redis:
-    host: 10.15.15.107
+    host: 172.17.0.11
     port: 6379
-    password: 
+    password: abcd1@3$
   main:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.15.15.207:3306/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://172.17.0.11:3306/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: 123456789
+    password: chen1211
     
     #url: jdbc:mysql://10.15.15.74:3306/coframe?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     #username: root
@@ -83,7 +83,7 @@ eureka:
       eos.sys-code: ${eos.application.sys-code}
       eos.pid: ${PID}
   client:
-    enabled: true
+    enabled: false
     register-with-eureka: true
     fetchRegistry: false
     serviceUrl:
