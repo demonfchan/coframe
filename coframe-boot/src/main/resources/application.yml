@@ -69,7 +69,7 @@ spring:
       ddl-auto: none
 #      naming:
 #        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#       implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+#       implicit-strategy: org.hibern1ate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
   resources:
     add-mappings: true
   servlet:
