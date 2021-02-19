@@ -1,0 +1,6 @@
+**/.settings
+**/target
+**/logs
+**/.idea
+/javadocs
+**/*.iml
